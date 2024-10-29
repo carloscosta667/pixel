@@ -26,7 +26,7 @@ return new class extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->unsignedInteger('car_services_id_car');
             $table->foreign('car_services_id_car', 'fk_car_services_has_service_types_car_services1_idx')
-                ->references('id_car')->on('car_services')
+                ->references('id_car_service')->on('car_services')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 

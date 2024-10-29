@@ -2,7 +2,7 @@
 
 namespace app\Traits;
 
-trait helper
+trait Helper
 {
     /**
      * The format response

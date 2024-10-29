@@ -24,7 +24,7 @@ return new class extends Migration
     {
         if (Schema::hasTable($this->tableName)) return;
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('id_car');
+            $table->increments('id_car_service');
             $table->string('name', 45);
             $table->softDeletes();
             $table->timestamps();

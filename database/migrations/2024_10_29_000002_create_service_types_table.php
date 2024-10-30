@@ -25,7 +25,7 @@ return new class extends Migration
         if (Schema::hasTable($this->tableName)) return;
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id_service_type');
-            $table->string('name', 45);
+            $table->string('name', 45)->unique();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -30,7 +30,10 @@ Route::middleware('api')
                                 Route::post('/service', [CarServiceController::class,'createCarService']);
                                 Route::put('/service/{id}', [CarServiceController::class,'updateCarService']);
                                 Route::delete('/service/{id}', [CarServiceController::class,'deleteCarService']);
+
                                 Route::post('/service/add-service-type', [CarServiceController::class,'addServiceTypeToCarService']);
+                                Route::delete('/service/delete-service-type/{id}', [CarServiceController::class,'deleteServiceTypeFromCarService']);
+
                         });
 
                         Route::prefix('service')->group(function () {

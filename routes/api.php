@@ -31,8 +31,8 @@ Route::middleware('api')
                                 Route::put('/service/{id}', [CarServiceController::class,'updateCarService']);
                                 Route::delete('/service/{id}', [CarServiceController::class,'deleteCarService']);
 
-                                Route::post('/service/add-service-type', [CarServiceController::class,'addServiceTypeToCarService']);
-                                Route::delete('/service/delete-service-type/{id}', [CarServiceController::class,'deleteServiceTypeFromCarService']);
+                                Route::post('/service/link-service-type', [CarServiceController::class,'linkServiceTypeToCarService']);
+                                Route::delete('/service/unlink-service-type/{id}', [CarServiceController::class,'unlinkServiceTypeFromCarService']);
 
                         });
 

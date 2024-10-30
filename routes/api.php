@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarServiceController;
+use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
@@ -23,15 +24,19 @@ Route::middleware('api')
 
                 //need bearer token
                 Route::middleware('auth:api')
-                    ->group(function () {
+                    ->middleware('throttle:60,1')->group(function () {
 
                         Route::prefix('car')->group(function () {
                                 Route::post('/service', [CarServiceController::class,'createCarService']);
                                 Route::put('/service/{id}', [CarServiceController::class,'updateCarService']);
                                 Route::delete('/service/{id}', [CarServiceController::class,'deleteCarService']);
-
                         });
 
+                        Route::prefix('service')->group(function () {
+                            Route::post('/type', [ServiceTypeController::class,'createCarService']);
+                            Route::put('/type/{id}', [ServiceTypeController::class,'updateCarService']);
+                            Route::delete('/type/{id}', [ServiceTypeController::class,'deleteCarService']);
+                        });
 
                     });
 
@@ -40,8 +45,10 @@ Route::middleware('api')
 
                     Route::get('/car/service/{id?}', [CarServiceController::class, 'getCarService']);
 
+                    Route::get('/service/type/{id?}', [ServiceTypeController::class, 'getServiceType']);
+
                     Route::post('auth', [UserController::class,'login']);
-                    
+
                 });
 
                 Route::any('/{any}', function() {

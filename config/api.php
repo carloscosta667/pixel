@@ -34,6 +34,10 @@ return [
         ]
     ],
 
-    'something_wrong' => 'Something went wrong!'
+    'something_wrong' => 'Something went wrong!',
+
+    'account_not_activated' => 'Account not activated.',
+    'login_success' => 'Successfully logged!.',
+    'login_invalid' => 'Invalid login.',
 
 ];

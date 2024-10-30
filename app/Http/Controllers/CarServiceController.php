@@ -18,7 +18,7 @@ class CarServiceController extends Controller
      * Get car service available
      *
      * $id = null, get all car services
-     * $id > 0, get the car service with $id
+     * $id > 0, get the car service by $id
      * @param null $id
      * @return JsonResponse
      */

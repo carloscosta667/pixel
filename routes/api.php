@@ -43,7 +43,7 @@ Route::middleware('api')
                         });
 
                         Route::prefix('mechanic')->group(function () {
-                            Route::get('/', [MechanicController::class,'createMechanic']);
+                            Route::get('/', [MechanicController::class,'getMechanic']);
                             Route::post('/', [MechanicController::class,'createMechanic']);
                             Route::put('/{id}', [MechanicController::class,'updateMechanic']);
                             Route::delete('/{id}', [MechanicController::class,'deleteMechanic']);

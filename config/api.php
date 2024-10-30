@@ -28,7 +28,7 @@ return [
                 'error'   => 'Car service not successful edited',
             ],
             'delete' => [
-                'success' => 'Car service  successful deleted',
+                'success' => 'Car service successful deleted',
                 'error'   => 'Car service not successful deleted'
             ]
         ]

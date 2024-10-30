@@ -33,13 +33,18 @@ Route::middleware('api')
 
                                 Route::post('/link-service-type', [CarServiceController::class,'linkServiceTypeToCarService']);
                                 Route::delete('/unlink-service-type/{id}', [CarServiceController::class,'unlinkServiceTypeFromCarService']);
-
                         });
 
                         Route::prefix('service/type')->group(function () {
                             Route::post('/', [ServiceTypeController::class,'createServiceType']);
                             Route::put('/{id}', [ServiceTypeController::class,'updateServiceType']);
                             Route::delete('/{id}', [ServiceTypeController::class,'deleteServiceType']);
+                        });
+
+                        Route::prefix('mechanic')->group(function () {
+                            Route::post('/', [ServiceTypeController::class,'createMechanic']);
+                            Route::put('/{id}', [ServiceTypeController::class,'updateMechanic']);
+                            Route::delete('/{id}', [ServiceTypeController::class,'deleteMechanic']);
                         });
 
                     });

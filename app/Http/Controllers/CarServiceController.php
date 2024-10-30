@@ -36,6 +36,8 @@ class CarServiceController extends Controller
                     CarServiceModel::isCarServiceIdValid()
                 );
 
+                $data = CarServiceModel::find($id);
+                
                 if($validatedData->fails()){
                     return $this->responseFormat($data, $validatedData->errors(),
                         Response::HTTP_BAD_REQUEST);

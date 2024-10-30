@@ -36,12 +36,13 @@ class CarServiceController extends Controller
                     CarServiceModel::isCarServiceIdValid()
                 );
 
-                $data = CarServiceModel::find($id);
-                
                 if($validatedData->fails()){
                     return $this->responseFormat($data, $validatedData->errors(),
                         Response::HTTP_BAD_REQUEST);
                 }
+
+                //get car service by id where deleted_at is not null
+                $data = CarServiceModel::find($id);
 
             }else{
 
@@ -100,5 +101,86 @@ class CarServiceController extends Controller
 
     }
 
+    /**
+     * Update car service
+     *
+     * @param $id
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateCarService($id, Request $request): JsonResponse
+    {
+        try {
+
+            $data['id_car_service'] = $id;
+            $validatedData = Validator::make(
+                array_merge(
+                    $data,
+                    $request->all()
+                ),
+                array_merge(CarServiceModel::isCarServiceIdValid(),
+                            CarServiceModel::isCarServiceNameValid()
+                )
+            );
+
+            if($validatedData->fails()){
+                return $this->responseFormat($data, $validatedData->errors(),
+                    Response::HTTP_BAD_REQUEST);
+            }
+
+            $carService = CarServiceModel::find($id);
+
+            $data['name']['old'] = $carService->name;
+            $data['name']['new'] = $request->get('name');
+
+            $carService->name = $request->get('name');
+            $carService->save();
+
+            return $this->responseFormat($data, config('api.service.car.put.success'),
+                Response::HTTP_OK);
+
+        } catch ( Exception $e) {
+
+            return $this->responseFormatUnknown($e);
+
+        }
+
+    }
+
+    /**
+     * Soft delete car service
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function deleteCarService($id): JsonResponse
+    {
+        try {
+
+            $data['id_car_service'] = $id;
+
+            $validatedData = Validator::make(
+                $data,
+                CarServiceModel::isCarServiceIdValid()
+            );
+
+            if($validatedData->fails()){
+                return $this->responseFormat($data, $validatedData->errors(),
+                    Response::HTTP_BAD_REQUEST);
+            }
+
+            //soft deleted
+            CarServiceModel::find($id)->delete();
+
+            return $this->responseFormat($data, config('api.service.car.delete.success'),
+                Response::HTTP_OK);
+
+        } catch ( Exception $e) {
+
+            return $this->responseFormatUnknown($e);
+
+        }
+
+    }
 
 }

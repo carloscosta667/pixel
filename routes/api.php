@@ -26,20 +26,20 @@ Route::middleware('api')
                 Route::middleware('auth:api')
                     ->middleware('throttle:60,1')->group(function () {
 
-                        Route::prefix('car')->group(function () {
-                                Route::post('/service', [CarServiceController::class,'createCarService']);
-                                Route::put('/service/{id}', [CarServiceController::class,'updateCarService']);
-                                Route::delete('/service/{id}', [CarServiceController::class,'deleteCarService']);
+                        Route::prefix('car/service')->group(function () {
+                                Route::post('/', [CarServiceController::class,'createCarService']);
+                                Route::put('/{id}', [CarServiceController::class,'updateCarService']);
+                                Route::delete('/{id}', [CarServiceController::class,'deleteCarService']);
 
-                                Route::post('/service/link-service-type', [CarServiceController::class,'linkServiceTypeToCarService']);
-                                Route::delete('/service/unlink-service-type/{id}', [CarServiceController::class,'unlinkServiceTypeFromCarService']);
+                                Route::post('/link-service-type', [CarServiceController::class,'linkServiceTypeToCarService']);
+                                Route::delete('/unlink-service-type/{id}', [CarServiceController::class,'unlinkServiceTypeFromCarService']);
 
                         });
 
-                        Route::prefix('service')->group(function () {
-                            Route::post('/type', [ServiceTypeController::class,'createServiceType']);
-                            Route::put('/type/{id}', [ServiceTypeController::class,'updateServiceType']);
-                            Route::delete('/type/{id}', [ServiceTypeController::class,'deleteServiceType']);
+                        Route::prefix('service/type')->group(function () {
+                            Route::post('/', [ServiceTypeController::class,'createServiceType']);
+                            Route::put('/{id}', [ServiceTypeController::class,'updateServiceType']);
+                            Route::delete('/{id}', [ServiceTypeController::class,'deleteServiceType']);
                         });
 
                     });

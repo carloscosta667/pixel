@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 
 class CarService extends Model
 {
@@ -53,7 +54,12 @@ class CarService extends Model
     static function isCarServiceIdValid(): array
     {
         return [
-            'id_car_service' => 'required|exists:car_services',
+            'id_car_service' => [
+                                    'required',
+                                    Rule::exists('car_services')->where(function ($query) {
+                                        return $query->whereNull('deleted_at');
+                                    })
+                                ]
         ];
     }
 

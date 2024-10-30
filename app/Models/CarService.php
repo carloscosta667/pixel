@@ -88,7 +88,7 @@ class CarService extends Model
     }
 
     /**
-     * Rules add new service type to car service.
+     * Rules add new service type to the car service.
      *
      * @param $id_service_type
      * @return  array
@@ -101,6 +101,30 @@ class CarService extends Model
                     return $query->where('service_types_id_service_type',$id_service_type);
                 })
             ]
+        ];
+    }
+
+    /**
+     * Rules messages about the service type already linked
+     *
+     * @return array[]
+     */
+    static function messageIsServiceTypeIdUnique(): array
+    {
+        return [
+            'car_services_id_car.unique' => config('api.service.car.type.already_linked')
+        ];
+    }
+
+    /**
+     * Rules to check if the id provided exist on car_services_has_service_types table.
+     *
+     * @return  array
+     */
+    static function isServiceTypeLinkedCarServiceValid(): array
+    {
+        return [
+            'id_car_services_has_service_types' => 'required|exist:car_services_has_service_types'
         ];
     }
 }

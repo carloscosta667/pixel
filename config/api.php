@@ -33,7 +33,8 @@ return [
             ],
             'type' => [
                 'post' => 'Service type successful linked to the car service',
-                'delete' => 'Service type successful unlinked from the car service'
+                'delete' => 'Service type successful unlinked from the car service',
+                'already_linked' => 'Service type already linked to the car service'
             ]
         ],
 

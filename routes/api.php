@@ -42,9 +42,10 @@ Route::middleware('api')
                         });
 
                         Route::prefix('mechanic')->group(function () {
-                            Route::post('/', [ServiceTypeController::class,'createMechanic']);
-                            Route::put('/{id}', [ServiceTypeController::class,'updateMechanic']);
-                            Route::delete('/{id}', [ServiceTypeController::class,'deleteMechanic']);
+                            Route::get('/', [MechanicController::class,'createMechanic']);
+                            Route::post('/', [MechanicController::class,'createMechanic']);
+                            Route::put('/{id}', [MechanicController::class,'updateMechanic']);
+                            Route::delete('/{id}', [MechanicController::class,'deleteMechanic']);
                         });
 
                     });

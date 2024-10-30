@@ -58,6 +58,25 @@ return [
         ]
     ],
 
+    'mechanic' => [
+        'get' => [
+            'success' => 'Get mechanic successful',
+            'error'   => 'Get mechanic not successful',
+        ],
+        'post' => [
+            'success' => 'Mechanic successful created',
+            'error'   => 'Mechanic not successful created'
+        ],
+        'put' => [
+            'success' => 'Mechanic successful edited',
+            'error'   => 'Mechanic not successful edited',
+        ],
+        'delete' => [
+            'success' => 'Mechanic successful deleted',
+            'error'   => 'Mechanic not successful deleted'
+        ]
+    ],
+
     'something_wrong' => 'Something went wrong!',
 
     'account_not_activated' => 'Account not activated',

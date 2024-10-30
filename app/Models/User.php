@@ -1,15 +1,15 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -43,6 +43,26 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+        ];
+    }
+
+    /**
+     * The regex password
+     *
+     * @var string
+     */
+    protected static string $regex_password = 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,255}$/';
+
+    /**
+     * The rules to login user.
+     *
+     * @return  array
+     */
+    static function rulesLogin(): array
+    {
+        return [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|'.self::$regex_password
         ];
     }
 }

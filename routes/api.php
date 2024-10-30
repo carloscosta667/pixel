@@ -33,9 +33,9 @@ Route::middleware('api')
                         });
 
                         Route::prefix('service')->group(function () {
-                            Route::post('/type', [ServiceTypeController::class,'createCarService']);
-                            Route::put('/type/{id}', [ServiceTypeController::class,'updateCarService']);
-                            Route::delete('/type/{id}', [ServiceTypeController::class,'deleteCarService']);
+                            Route::post('/type', [ServiceTypeController::class,'createServiceType']);
+                            Route::put('/type/{id}', [ServiceTypeController::class,'updateServiceType']);
+                            Route::delete('/type/{id}', [ServiceTypeController::class,'deleteServiceType']);
                         });
 
                     });

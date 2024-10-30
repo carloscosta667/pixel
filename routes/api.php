@@ -38,8 +38,10 @@ Route::middleware('api')
                 //using throttle to protect against DoS attacks
                 Route::middleware('throttle:60,1')->group(function () {
 
-                    Route::post('auth', [UserController::class,'login']);
+                    Route::get('/car/service/{id?}', [CarServiceController::class, 'getCarService']);
 
+                    Route::post('auth', [UserController::class,'login']);
+                    
                 });
 
                 Route::any('/{any}', function() {

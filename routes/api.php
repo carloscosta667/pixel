@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingDateController;
 use App\Http\Controllers\CarServiceController;
 use App\Http\Controllers\MechanicController;
 use App\Http\Controllers\ServiceTypeController;
@@ -43,7 +44,6 @@ Route::middleware('api')
                         });
 
                         Route::prefix('mechanic')->group(function () {
-                            Route::get('/', [MechanicController::class,'getMechanic']);
                             Route::post('/', [MechanicController::class,'createMechanic']);
                             Route::put('/{id}', [MechanicController::class,'updateMechanic']);
                             Route::delete('/{id}', [MechanicController::class,'deleteMechanic']);
@@ -57,6 +57,8 @@ Route::middleware('api')
                     Route::get('/car/service/{id?}', [CarServiceController::class, 'getCarService']);
 
                     Route::get('/service/type/{id?}', [ServiceTypeController::class, 'getServiceType']);
+
+                    Route::get('/mechanic/{id?}', [MechanicController::class,'getMechanic']);
 
                     Route::post('auth', [UserController::class,'login']);
 

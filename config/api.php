@@ -31,6 +31,25 @@ return [
                 'success' => 'Car service successful deleted',
                 'error'   => 'Car service not successful deleted'
             ]
+        ],
+
+        'type' => [
+            'get' => [
+                'success' => 'Get service type successful',
+                'error'   => 'Get service type not successful',
+            ],
+            'post' => [
+                'success' => 'Service type successful created',
+                'error'   => 'Service type not successful created'
+            ],
+            'put' => [
+                'success' => 'Service type successful edited',
+                'error'   => 'Service type not successful edited',
+            ],
+            'delete' => [
+                'success' => 'Service type successful deleted',
+                'error'   => 'Service type not successful deleted'
+            ]
         ]
     ],
 

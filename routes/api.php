@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarServiceController;
+use App\Http\Controllers\MechanicController;
 use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Response;

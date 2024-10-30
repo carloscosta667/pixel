@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
@@ -47,6 +48,17 @@ class CarService extends Model
 
 
     /**
+     * The type service that belong to car service.
+     */
+    public function serviceType(): BelongsToMany
+    {
+        return $this->belongsToMany(ServiceType::class,
+            'car_services_has_service_types',
+            'car_services_id_car',
+            'service_types_id_service_type');
+    }
+
+    /**
      * Check if car service id is valid.
      *
      * @return  array
@@ -64,7 +76,7 @@ class CarService extends Model
     }
 
     /**
-     * Rules to create a car service.
+     * Rules to create or update a car service.
      *
      * @return  array
      */

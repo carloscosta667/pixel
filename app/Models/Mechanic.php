@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\Rule;
 
 class Mechanic extends Model
 {
@@ -43,5 +44,55 @@ class Mechanic extends Model
         'created_at'
     ];
 
+    /**
+     * Check if mechanic id is valid.
+     *
+     * @return  array
+     */
+    static function isMechanicIdValid(): array
+    {
+        return [
+            'id_mechanic' => [
+                'required',
+                Rule::exists('mechanics')->where(function ($query) {
+                    return $query->whereNull('deleted_at');
+                })
+            ]
+        ];
+    }
 
+    /**
+     * Rules to create or update a mechanic.
+     * Check if we have the first name and last name already registered
+     *
+     * @param $last_name
+     * @return  array
+     */
+    static function isMechanicNameValid($last_name): array
+    {
+        return [
+            'first_name' => [
+                'required',
+                'string',
+                'min:2',
+                'max:45',
+                Rule::unique('mechanics')->where(function ($query) use ($last_name) {
+                    return $query->where('last_name', $last_name);
+                })
+            ],
+            'last_name' => 'required|string|min:2|max:45'
+        ];
+    }
+
+    /**
+     * Rules messages about the mechanic with the same first name and the same last name
+     *
+     * @return array[]
+     */
+    static function messageIsServiceTypeIdUnique(): array
+    {
+        return [
+            'first_name.unique' => config('api.mechanic.unique_name')
+        ];
+    }
 }

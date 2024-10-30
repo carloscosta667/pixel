@@ -3,7 +3,7 @@
 namespace app\Http\Controllers;
 
 use App\Models\User as UserModel;
-use app\Traits\helper;
+use app\Traits\Helper;
 use http\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -45,8 +45,8 @@ class UserController extends Controller
                         , Response::HTTP_BAD_REQUEST);
                 }
 
-                //get the bearer token to response
-                $bearer_token = time().'-'.Str::random(60);
+                //generate the bearer token
+                $bearer_token = $user->id . '-' . time() . '-' . Str::random(60);
                 $user->api_token = $bearer_token;
 
                 $user->save();

@@ -186,12 +186,12 @@ class CarServiceController extends Controller
     }
 
     /**
-     * Add service type to car service
+     * Link service type to car service
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function addServiceTypeToCarService(Request $request): JsonResponse
+    public function linkServiceTypeToCarService(Request $request): JsonResponse
     {
         try {
 
@@ -207,7 +207,8 @@ class CarServiceController extends Controller
                     ServiceTypeModel::isServiceTypeIdValid(),
                     CarServiceModel::isCarServiceIdValid(),
                     CarServiceModel::isServiceTypeIdUnique($data['id_service_type'])
-                )
+                ),
+                CarServiceModel::messageIsServiceTypeIdUnique()
             );
 
             if($validatedData->fails()){
@@ -224,6 +225,39 @@ class CarServiceController extends Controller
 
 
             return $this->responseFormat($data, config('api.service.car.type.post'),
+                Response::HTTP_OK);
+
+        } catch ( Exception $e) {
+
+            return $this->responseFormatUnknown($e);
+
+        }
+    }
+
+    /**
+     * Unlink service type from car service
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function unlinkServiceTypeFromCarService($id): JsonResponse
+    {
+        try {
+
+            $data['id_car_services_has_service_types'] = $id;
+            $validatedData = Validator::make(
+                $data,
+                CarServiceModel::isServiceTypeLinkedCarServiceValid()
+            );
+
+            if($validatedData->fails()){
+                return $this->responseFormat($data, $validatedData->errors(),
+                    Response::HTTP_BAD_REQUEST);
+            }
+
+            DB::table('car_services_has_service_types')->where($data)->delete();
+
+            return $this->responseFormat($data, config('api.service.car.type.delete'),
                 Response::HTTP_OK);
 
         } catch ( Exception $e) {

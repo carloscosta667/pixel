@@ -32,8 +32,8 @@ return [
                 'error'   => 'Car service not successful deleted'
             ],
             'type' => [
-                'post' => 'Service type successful linked to car service',
-                'delete' => 'Service type successful unlinked from car service'
+                'post' => 'Service type successful linked to the car service',
+                'delete' => 'Service type successful unlinked from the car service'
             ]
         ],
 

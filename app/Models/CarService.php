@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class CarService extends Model
 {
-    use HasFactory;
+
     use SoftDeletes;
 
     /**
@@ -84,6 +84,23 @@ class CarService extends Model
     {
         return [
             'name' => 'required|string|min:2|max:45|unique:car_services'
+        ];
+    }
+
+    /**
+     * Rules add new service type to car service.
+     *
+     * @param $id_service_type
+     * @return  array
+     */
+    static function isServiceTypeIdUnique($id_service_type): array
+    {
+        return [
+            'car_services_id_car' => [
+                Rule::unique('car_services_has_service_types')->where(function ($query) use ($id_service_type) {
+                    return $query->where('service_types_id_service_type',$id_service_type);
+                })
+            ]
         ];
     }
 }

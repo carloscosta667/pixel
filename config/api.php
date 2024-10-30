@@ -30,6 +30,10 @@ return [
             'delete' => [
                 'success' => 'Car service successful deleted',
                 'error'   => 'Car service not successful deleted'
+            ],
+            'type' => [
+                'post' => 'Service type successful linked to car service',
+                'delete' => 'Service type successful unlinked from car service'
             ]
         ],
 

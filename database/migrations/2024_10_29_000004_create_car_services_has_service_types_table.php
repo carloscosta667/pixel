@@ -24,6 +24,7 @@ return new class extends Migration
     {
         if (Schema::hasTable($this->tableName)) return;
         Schema::create($this->tableName, function (Blueprint $table) {
+            $table->increments('id_car_services_has_service_types');
             $table->unsignedInteger('car_services_id_car');
             $table->foreign('car_services_id_car', 'fk_car_services_has_service_types_car_services1_idx')
                 ->references('id_car_service')->on('car_services')

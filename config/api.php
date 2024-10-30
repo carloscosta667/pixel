@@ -74,7 +74,8 @@ return [
         'delete' => [
             'success' => 'Mechanic successful deleted',
             'error'   => 'Mechanic not successful deleted'
-        ]
+        ],
+        'unique_name' => 'The first name and last name already taken'
     ],
 
     'something_wrong' => 'Something went wrong!',

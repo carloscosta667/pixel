@@ -124,7 +124,7 @@ class CarService extends Model
     static function isServiceTypeLinkedCarServiceValid(): array
     {
         return [
-            'id_car_services_has_service_types' => 'required|exist:car_services_has_service_types'
+            'id_car_services_has_service_types' => 'required|exists:car_services_has_service_types'
         ];
     }
 }

@@ -52,8 +52,8 @@ class ServiceType extends Model
         return $this->belongsToMany(CarService::class,
             'car_services_has_service_types',
             'service_types_id_service_type',
-            'car_services_id_car',
-            );
+            'car_services_id_car'
+        )->withPivot('id_car_services_has_service_types');
     }
 
     /**

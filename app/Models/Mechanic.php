@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
@@ -45,6 +46,19 @@ class Mechanic extends Model
     ];
 
     /**
+     * Mechanics has many booking dates.
+     *
+     * @return HasMany
+     */
+    public function bookingDate(): HasMany
+    {
+        return $this->hasMany(BookingDate::class,
+            'mechanics_id_mechanic',
+            'id_mechanic'
+        );
+    }
+
+    /**
      * Check if mechanic id is valid.
      *
      * @return  array
@@ -53,7 +67,8 @@ class Mechanic extends Model
     {
         return [
             'id_mechanic' => [
-                'required',
+                'integer',
+                'nullable',
                 Rule::exists('mechanics')->where(function ($query) {
                     return $query->whereNull('deleted_at');
                 })

@@ -55,7 +55,7 @@ class BookingDate extends Model
         return $this->hasOne(Mechanic::class,
             'id_mechanic',
             'mechanics_id_mechanic'
-        );
+        )->withTrashed();
     }
 
     /**
@@ -66,7 +66,7 @@ class BookingDate extends Model
         return $this->hasOne(ServiceType::class,
             'id_service_type',
             'service_types_id_service_type'
-        );
+        )->withTrashed();
     }
 
     /**

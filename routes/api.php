@@ -24,7 +24,7 @@ Route::middleware('api')
         Route::prefix('v' . env('API_VERSION', '1'))
             ->group(function() {
 
-                //need bearer token
+                //routes admin access
                 Route::middleware('auth:api')
                     ->middleware('throttle:60,1')->group(function () {
 
@@ -56,6 +56,8 @@ Route::middleware('api')
                         });
                     });
 
+
+                //routes customer access
                 //using throttle to protect against DoS attacks
                 Route::middleware('throttle:60,1')->group(function () {
 

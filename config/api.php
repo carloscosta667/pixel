@@ -78,6 +78,25 @@ return [
         'unique_name' => 'The first name and last name already taken'
     ],
 
+    'booking_date' => [
+        'get' => [
+            'success' => 'Booking date successful',
+            'error'   => 'Booking date not successful',
+        ],
+        'post' => [
+            'success' => 'Booking date successful created',
+            'error'   => 'Booking date not successful created'
+        ],
+        'put' => [
+            'success' => 'Booking date successful edited',
+            'error'   => 'Booking date not successful edited',
+        ],
+        'delete' => [
+            'success' => 'Booking date successful deleted',
+            'error'   => 'Booking date not successful deleted'
+        ]
+    ],
+
     'something_wrong' => 'Something went wrong!',
 
     'account_not_activated' => 'Account not activated',

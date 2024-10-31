@@ -49,6 +49,11 @@ Route::middleware('api')
                             Route::delete('/{id}', [MechanicController::class,'deleteMechanic']);
                         });
 
+                        Route::prefix('booking-date')->group(function () {
+                            Route::post('/', [BookingDateController::class,'createBookingDate']);
+                            Route::put('/{id}', [BookingDateController::class,'updateBookingDate']);
+                            Route::delete('/{id}', [BookingDateController::class,'deleteBookingDate']);
+                        });
                     });
 
                 //using throttle to protect against DoS attacks
@@ -59,6 +64,8 @@ Route::middleware('api')
                     Route::get('/service/type/{id?}', [ServiceTypeController::class, 'getServiceType']);
 
                     Route::get('/mechanic/{id?}', [MechanicController::class,'getMechanic']);
+
+                    Route::get('/booking-date/{id?}', [BookingDateController::class,'getBookingDate']);
 
                     Route::post('auth', [UserController::class,'login']);
 

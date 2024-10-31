@@ -65,11 +65,12 @@ class ServiceType extends Model
     {
         return [
             'id_service_type' => [
-                                    'required',
-                                    Rule::exists('service_types')->where(function ($query) {
-                                        return $query->whereNull('deleted_at');
-                                    })
-                                ]
+                'required',
+                'integer',
+                Rule::exists('service_types')->where(function ($query) {
+                    return $query->whereNull('deleted_at');
+                })
+            ]
         ];
     }
 

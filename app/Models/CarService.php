@@ -55,11 +55,12 @@ class CarService extends Model
     {
         return [
             'id_car_service' => [
-                                    'required',
-                                    Rule::exists('car_services')->where(function ($query) {
-                                        return $query->whereNull('deleted_at');
-                                    })
-                                ]
+                'required',
+                'integer',
+                Rule::exists('car_services')->where(function ($query) {
+                    return $query->whereNull('deleted_at');
+                })
+            ]
         ];
     }
 

@@ -79,6 +79,7 @@ class BookingDate extends Model
         return [
             'id_booking_date' => [
                 'required',
+                'integer',
                 Rule::exists('booking_dates')->where(function ($query) {
                     return $query->whereNull('deleted_at');
                 })

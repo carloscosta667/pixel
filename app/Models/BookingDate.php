@@ -45,7 +45,7 @@ class BookingDate extends Model
     ];
 
     /**
-     * Check if mechanic id is valid.
+     * Check if booking date id is valid.
      *
      * @return  array
      */
@@ -61,4 +61,52 @@ class BookingDate extends Model
         ];
     }
 
+    /**
+     * Check if mechanic is available between start date and end date.
+     *
+     * @param $start_date_service
+     * @param $end_date_service
+     * @return  array
+     */
+    static function isBookingDateMechanicAvailable($start_date_service, $end_date_service): array
+    {
+        return [
+            'mechanics_id_mechanic' => [
+                'required',
+                Rule::unique('booking_dates')->where(function ($query) use ($start_date_service, $end_date_service) {
+
+                    return $query->where(function ($query) use ($start_date_service, $end_date_service) {
+                        $query->whereBetween('start_date_service', [$start_date_service, $end_date_service])
+                            ->orwhereBetween('end_date_service', [$start_date_service, $end_date_service]);
+                    })->whereNull('deleted_at');
+
+                })
+            ]
+        ];
+    }
+
+    /**
+     * Check if start date and end date is valid.
+     *
+     * @return  array
+     */
+    static function isBookingDatesValid(): array
+    {
+        return [
+            'start_date_service'      => 'required|date|after:now|before:end_date_service',
+            'end_date_service'        => 'date|after:start_date_service',
+        ];
+    }
+
+    /**
+     * Rules messages about the mechanic with the same first name and the same last name
+     *
+     * @return array[]
+     */
+    static function messageIsBookingDateMechanicAvailable(): array
+    {
+        return [
+            'mechanics_id_mechanic.unique' => config('api.booking_date.available')
+        ];
+    }
 }

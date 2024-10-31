@@ -42,7 +42,10 @@ class ServiceTypeController extends Controller
                 }
 
                 //get service type by id where deleted_at is not null
-                $data = ServiceTypeModel::find($id);
+                $data['id_service_type'] = $id;
+                $data['name'] = ServiceTypeModel::find($id)->name;
+                $data['car_service_list'] = ServiceTypeModel::find($id)->carService;
+
 
             }else{
 

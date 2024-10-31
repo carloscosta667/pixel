@@ -34,7 +34,7 @@ class BookingDateController extends Controller
             if($id){
 
                 $validatedData = Validator::make(
-                    ['id_mechanic' => $id],
+                    ['id_booking_date' => $id],
                     BookingDateModel::isBookingDateIdValid()
                 );
 
@@ -44,12 +44,12 @@ class BookingDateController extends Controller
                 }
 
                 //get booking date by id where deleted_at is not null
-                $data = BookingDateModel::find($id);
+                $data = BookingDateModel::with('mechanic')->find($id);
 
             }else{
 
                 //get all booking dates where deleted_at is not null
-                $data = BookingDateModel::all();
+                $data = BookingDateModel::with('mechanic')->get();
             }
 
             return $this->responseFormat($data, config('api.booking_date.get.success'),

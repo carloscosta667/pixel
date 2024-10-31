@@ -33,9 +33,9 @@ return new class extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->unsignedInteger('id_car_services_has_service_types');
-            $table->foreign('id_car_services_has_service_types', 'fk_services_has_service_types_car_services1_idx')
-                ->references('id_car_services_has_service_types')->on('car_services_has_service_types')
+            $table->unsignedInteger('service_types_id_service_type');
+            $table->foreign('service_types_id_service_type', 'fk_service_types_id_service_type_idx')
+                ->references('id_service_type')->on('service_types')
                 ->onDelete('no action')
                 ->onUpdate('no action');
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
@@ -43,6 +44,17 @@ class ServiceType extends Model
         'created_at'
     ];
 
+    /**
+     * The car service that belong to type service.
+     */
+    public function carService(): BelongsToMany
+    {
+        return $this->belongsToMany(CarService::class,
+            'car_services_has_service_types',
+            'service_types_id_service_type',
+            'car_services_id_car',
+            );
+    }
 
     /**
      * Check if service type id is valid.

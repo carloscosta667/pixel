@@ -94,7 +94,8 @@ return [
         'delete' => [
             'success' => 'Booking date successful deleted',
             'error'   => 'Booking date not successful deleted'
-        ]
+        ],
+        'available' => 'Mechanic already busy, please select other date or other mechanic.'
     ],
 
     'something_wrong' => 'Something went wrong!',

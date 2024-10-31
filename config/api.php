@@ -80,8 +80,8 @@ return [
 
     'booking_date' => [
         'get' => [
-            'success' => 'Booking date successful',
-            'error'   => 'Booking date not successful',
+            'success' => 'Get booking date successful',
+            'error'   => 'Get booking date not successful',
         ],
         'post' => [
             'success' => 'Booking date successful created',

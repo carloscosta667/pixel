@@ -163,15 +163,19 @@ class BookingDateController extends Controller
 
             $data['id_mechanic']['old'] = $booking_date->mechanics_id_mechanic;
             $data['id_mechanic']['new'] = $request->get('id_mechanic');
+            $booking_date->mechanics_id_mechanic = $request->get('id_mechanic');
 
-            $data['id_service_type']['old']  = $booking_date->service_types_id_service_type;
-            $data['id_service_type']['new']  = $request->get('id_service_type');
+            $data['id_service_type']['old'] = $booking_date->service_types_id_service_type;
+            $data['id_service_type']['new'] = $request->get('id_service_type');
+            $booking_date->service_types_id_service_type = $request->get('id_service_type');
 
             $data['start_date_service']['old'] = $booking_date->start_date_service;
             $data['start_date_service']['new'] = $request->get('start_date_service');
+            $booking_date->start_date_service = $request->get('start_date_service');
 
             $data['end_date_service']['old'] = $booking_date->end_date_service;
             $data['end_date_service']['new'] = $request->get('end_date_service');
+            $booking_date->end_date_service = $request->get('end_date_service');
 
             $booking_date->save();
 

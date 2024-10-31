@@ -15,7 +15,7 @@ class ServiceTypeController extends Controller
     use Helper;
 
     /**
-     * Get service type available
+     * Get service type
      *
      * $id = null, get all service types
      * $id > 0, get the service type by $id
@@ -45,7 +45,7 @@ class ServiceTypeController extends Controller
                 $data['id_service_type'] = $id;
 
                 $data = ServiceTypeModel::with('carService')->find($id);
-                
+
             }else{
 
                 //get all service type where deleted_at is not null

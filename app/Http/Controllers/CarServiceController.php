@@ -17,7 +17,7 @@ class CarServiceController extends Controller
     use Helper;
 
     /**
-     * Get car service available
+     * Get car service
      *
      * $id = null, get all car services
      * $id > 0, get the car service by $id

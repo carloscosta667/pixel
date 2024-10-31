@@ -44,12 +44,12 @@ class BookingDateController extends Controller
                 }
 
                 //get booking date by id where deleted_at is not null
-                $data = BookingDateModel::with('mechanic')->find($id);
+                $data = BookingDateModel::with('mechanic', 'serviceType')->find($id);
 
             }else{
 
                 //get all booking dates where deleted_at is not null
-                $data = BookingDateModel::with('mechanic')->get();
+                $data = BookingDateModel::with('mechanic', 'serviceType')->get();
             }
 
             return $this->responseFormat($data, config('api.booking_date.get.success'),

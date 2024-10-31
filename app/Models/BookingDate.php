@@ -113,13 +113,14 @@ class BookingDate extends Model
     /**
      * Check if start date and end date is valid.
      *
+     * @param bool $date_required
      * @return  array
      */
-    static function isBookingDatesValid(): array
+    static function isBookingDatesValid(bool $date_required = true): array
     {
         return [
-            'start_date_service'      => 'required|date|after:now|before:end_date_service',
-            'end_date_service'        => 'date|after:start_date_service',
+            'start_date_service' => ($date_required ? 'required| ' : '' ) . 'date|after:now|before:end_date_service',
+            'end_date_service'   => 'date|after:start_date_service',
         ];
     }
 

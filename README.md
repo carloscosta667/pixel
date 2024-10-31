@@ -17,7 +17,12 @@ The system will then have unauthenticated READ functionally for users be able to
 - ** 2. Copy over the .env.example to .env file **
 - ** 3. composer install **
 - ** 4. php artisan migrate and click enter to create pixel database **
-- ** 5. php artisan db:seed to create dummy data to be able to test **
+- ** 5. php artisan db:seed It will create your account to be able to test **
+- ** 6. Create postman collection by uploading this file Pixel_Car_Booking_API_(v1).postman_collection.json located in the root of the project**
+- ** 7. Log in and collect "api_token" and set up on collection Auth Type 'Bear Token'**
 
+## Notes
+
+- ** When you do php artisan migrate:rollback & php artisan migrate always run php artisan db:seed to create your account **
 
 

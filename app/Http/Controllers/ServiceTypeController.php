@@ -43,16 +43,13 @@ class ServiceTypeController extends Controller
 
                 //get service type by id where deleted_at is not null
                 $data['id_service_type'] = $id;
+
+                $data = ServiceTypeModel::with('carService')->find($id);
                 
-                $ServiceType = ServiceTypeModel::find($id);
-                $data['name'] = $ServiceType->name;
-                $data['car_service_list'] = $ServiceType->carService;
-
-
             }else{
 
                 //get all service type where deleted_at is not null
-                $data = ServiceTypeModel::all();
+                $data = ServiceTypeModel::with('carService')->get();
             }
 
             return $this->responseFormat($data, config('api.service.type.get.success'),

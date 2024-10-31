@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookingDate as BookingDateModel;
 use App\Models\Mechanic as MechanicModel;
 use App\Traits\Helper;
 use http\Exception;
@@ -19,46 +20,58 @@ class MechanicController extends Controller
      *
      * $id = null, get all mechanics
      * $id > 0, get the mechanic by $id
+     * @param Request $request
      * @param null $id
      * @return JsonResponse
      */
-    public function getMechanic($id = null): JsonResponse
+    public function getMechanic(Request $request, $id = null): JsonResponse
     {
         try {
 
             $data = [];
 
-            //if the id > 0 then try to get the mechanic by id
-            if($id){
-
-                $validatedData = Validator::make(
+            $validatedData = Validator::make(
+                array_merge(
                     ['id_mechanic' => $id],
-                    MechanicModel::isMechanicIdValid()
-                );
+                    $request->all()
+                ),
+                array_merge(
+                    MechanicModel::isMechanicIdValid(),
+                    BookingDateModel::isBookingDatesValid(false)
+                )
+            );
 
-                if($validatedData->fails()){
-                    return $this->responseFormat($data, $validatedData->errors(),
-                        Response::HTTP_BAD_REQUEST);
-                }
-
-                //get mechanic by id where deleted_at is not null
-                $data = MechanicModel::find($id);
-
-            }else{
-
-                //get all mechanic where deleted_at is not null
-                $data = MechanicModel::all();
+            if($validatedData->fails()){
+                return $this->responseFormat($data, $validatedData->errors(),
+                    Response::HTTP_BAD_REQUEST);
             }
+
+            $mechanicJobs = MechanicModel::query();
+
+            if($request->get('start_date_service')){
+
+                $start_date_service = $request->get('start_date_service');
+                $end_date_service = $request->get('end_date_service');
+
+                $mechanicJobs->with(['bookingDate' =>
+                    function($query) use ($start_date_service, $end_date_service){
+                        $query->whereBetween('start_date_service', [$start_date_service, $end_date_service])
+                            ->orwhereBetween('end_date_service', [$start_date_service, $end_date_service]);
+                    }
+                ]);
+
+            }
+
+            $data = $id ? $mechanicJobs->find($id) : $mechanicJobs->get();
 
             return $this->responseFormat($data, config('api.mechanic.get.success'),
                     Response::HTTP_OK);
 
-        } catch ( Exception $e) {
+            } catch ( Exception $e) {
 
             return $this->responseFormatUnknown($e);
 
         }
-
     }
 
     /**
@@ -104,7 +117,6 @@ class MechanicController extends Controller
             return $this->responseFormatUnknown($e);
 
         }
-
     }
 
     /**
@@ -157,7 +169,6 @@ class MechanicController extends Controller
             return $this->responseFormatUnknown($e);
 
         }
-
     }
 
     /**
@@ -193,8 +204,6 @@ class MechanicController extends Controller
             return $this->responseFormatUnknown($e);
 
         }
-
     }
-
 
 }

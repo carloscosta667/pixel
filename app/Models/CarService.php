@@ -46,18 +46,6 @@ class CarService extends Model
         'created_at'
     ];
 
-
-    /**
-     * The type service that belong to car service.
-     */
-    public function serviceType(): BelongsToMany
-    {
-        return $this->belongsToMany(ServiceType::class,
-            'car_services_has_service_types',
-            'car_services_id_car',
-            'service_types_id_service_type');
-    }
-
     /**
      * Check if car service id is valid.
      *

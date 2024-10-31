@@ -40,6 +40,7 @@ class BookingDate extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'service_types_id_service_type',
         'mechanics_id_mechanic',
         'deleted_at',
         'updated_at',
@@ -54,6 +55,17 @@ class BookingDate extends Model
         return $this->hasOne(Mechanic::class,
             'id_mechanic',
             'mechanics_id_mechanic'
+        );
+    }
+
+    /**
+     * Booking date has one service type.
+     */
+    public function serviceType(): HasOne
+    {
+        return $this->hasOne(ServiceType::class,
+            'id_service_type',
+            'service_types_id_service_type'
         );
     }
 

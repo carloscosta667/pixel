@@ -91,7 +91,7 @@ class CarServiceController extends Controller
             $carService->save();
 
             return $this->responseFormat(
-                ['id_car_service' => $carService->id_car_service],
+                ['id_car_service' => $carService->id_car_service . ''],
                 config('api.service.car.post.success'),
                 Response::HTTP_OK);
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Validation\Rule;
 
@@ -39,10 +40,22 @@ class BookingDate extends Model
      * @var array<int, string>
      */
     protected $hidden = [
+        'mechanics_id_mechanic',
         'deleted_at',
         'updated_at',
         'created_at'
     ];
+
+    /**
+     * Booking date has one mechanic.
+     */
+    public function mechanic(): HasOne
+    {
+        return $this->hasOne(Mechanic::class,
+            'id_mechanic',
+            'mechanics_id_mechanic'
+        );
+    }
 
     /**
      * Check if booking date id is valid.
